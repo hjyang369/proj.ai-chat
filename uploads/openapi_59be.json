@@ -1,0 +1,1335 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "WeeAI API (reverse-engineered)",
+    "version": "0.3.0",
+    "description": "Authenticated capture on user IP. Includes chat_multi, analyze/complexity, rag-context, sheet, audio."
+  },
+  "servers": [
+    {
+      "url": "https://weeai.kr"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "accessToken"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/api/me": {
+      "get": {
+        "summary": "현재 로그인 회원/워크스페이스",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "summary": "헬스체크",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/config/public": {
+      "get": {
+        "summary": "공개 설정",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/config/logo-by-domain": {
+      "get": {
+        "summary": "도메인별 로고",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/config/{cf_no}/ai-settings": {
+      "get": {
+        "summary": "AI 모델/에이전트 설정",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cf_no",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/config/{cf_no}/playground-settings": {
+      "get": {
+        "summary": "플레이그라운드 설정",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cf_no",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/config/{cf_no}/theme-settings": {
+      "get": {
+        "summary": "테마 설정",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cf_no",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/system/translate-enabled": {
+      "get": {
+        "summary": "번역 기능 on/off",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/system/ai-maintenance": {
+      "get": {
+        "summary": "AI 점검 상태",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/conversations": {
+      "get": {
+        "summary": "대화 목록",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "parameters": [
+          {
+            "name": "mb_no",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "post": {
+        "summary": "새 대화 생성",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "mb_no": 328,
+                "cs_title": "…",
+                "pt_no": null
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "cs_no issued"
+          }
+        }
+      }
+    },
+    "/api/messages": {
+      "get": {
+        "summary": "대화 메시지",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cs_no",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "post": {
+        "summary": "메시지 저장",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "cs_no": 41776,
+                "ms_role": "user",
+                "ms_content": "그래프를 시트로 만들어줘"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/messages/{ms_no}": {
+      "patch": {
+        "summary": "메시지 갱신",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "parameters": [
+          {
+            "name": "ms_no",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "ms_content": "[truncated]",
+                "ms_metadata": {
+                  "type": "sheet_state"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/chat/pii-check": {
+      "post": {
+        "summary": "PII 검사",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "message": "그래프를 시트로 만들어줘",
+                "attachments": [],
+                "userId": 328,
+                "conversationId": 41776
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/api-usage/credit/check": {
+      "post": {
+        "summary": "크레딧 사용 가능 여부",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "mb_no": 328
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/api-usage/credit/estimate": {
+      "post": {
+        "summary": "예상 크레딧",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "ag_no": 60
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/jobs/active": {
+      "get": {
+        "summary": "실행중/미전달 잡 폴링",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/jobs/by-conversation/{cs_no}": {
+      "get": {
+        "summary": "대화별 잡",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cs_no",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/jobs": {
+      "post": {
+        "summary": "잡 생성 (chat_multi 등)",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "created",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "jb_uid": "e139b332-…",
+                  "jb_status": "running",
+                  "reused": false,
+                  "jb_webhook_token": null
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "jb_kind": "chat_multi",
+                "jb_transport": "oneshot",
+                "jb_runner_kind": "next",
+                "mb_no": 328,
+                "cf_no": 1,
+                "cs_no": null,
+                "ag_no": null,
+                "jb_title": null,
+                "jb_href": "/chat",
+                "jb_input": {
+                  "models": 3
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/jobs/{jb_uid}/ack": {
+      "post": {
+        "summary": "잡 전달 확인",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "parameters": [
+          {
+            "name": "jb_uid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "via": "live"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/jobs/{jb_uid}/cancel": {
+      "post": {
+        "summary": "잡 취소",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "parameters": [
+          {
+            "name": "jb_uid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/jobs/{jb_uid}/progress": {
+      "patch": {
+        "summary": "잡 진행 갱신",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "parameters": [
+          {
+            "name": "jb_uid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/jobs/{jb_uid}/close-fanout": {
+      "post": {
+        "summary": "팬아웃 종료",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "parameters": [
+          {
+            "name": "jb_uid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "status": "completed",
+                "reason": null
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/playground/code": {
+      "post": {
+        "summary": "시트/코드 생성 (SSE)",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "text/event-stream SSE",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "data: {\"type\":\"job\",\"uid\":\"…\"}\n\ndata: {\"type\":\"content\",\"content\":\"…\"}\n\ndata: {\"type\":\"done\",\"ms_no\":1,\"status\":\"completed\"}\n\n"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "message": "[현재 워크북 상태 — 1개 시트, 탭=열 구분]\n[시트: 월별 매출 실적표]\n1\t월\t목표 매출\t실제 매출\t달성률\t전월 대비\n2\t2026-01\t50000000\t48500000\t=C2/B2\t\n3\t2026-02\t52000000\t51200000\t=C3/B3\t=C3/C2-1\n4\t2026-03\t55000000\t57800000\t=C4/B4\t=C4/C3-1\n5\t2026-04\t55000000\t53600000\t=C5/B5\t=C5/C4-1\n6\t2026-05\t58000000\t60400000\t=C6/B6\t=C6/C5-1\n7\t2026-06\t60000000\t58900000\t=C7/B7\t=C7/C6-1\n8\t2026-07\t62000000\t64700000\t=C8/B8\t=C8/C7-1\n9\t2026-08\t62000000\t61300000\t=C…",
+                "userText": "그래프를 시트로 만들어줘",
+                "history": [
+                  {
+                    "role": "user",
+                    "content": "월별 매출 실적표 만들어줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "월별 목표 매출과 실제 매출, 달성률 및 전월 대비 증감률을 포함하고 연간 합계는 수식으로 계산하도록 구성했습니다. 매출 수치는 예시 데이터입니다."
+                  },
+                  {
+                    "role": "user",
+                    "content": "그래프로 보는 시트도 추가해줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "스프레드시트가 생성되었습니다. 오른쪽에서 확인하세요!\n수정이 필요하면 말씀해 주세요."
+                  }
+                ],
+                "agNo": 185,
+                "systemPrompt": "당신은 스프레드시트/엑셀 문서 전문가입니다.\n사용자의 요청에 따라 HTML 테이블 형식의 스프레드시트를 생성합니다.\n결과는 Univer 스프레드시트 뷰어에서 렌더링됩니다.\n\n## 첨부 이미지\n사용자가 이미지를 첨부한 경우, 이미지에 포함된 표·수치·도식·텍스트를 시트에 정확히 반영하세요. 가능하면 원본 데이터를 빠짐없이 옮기고, 시각적 구조도 비슷하게 재현하세요.\n\n## 출력 규칙\n\n1. 먼저 스프레드시트를 ```html 코드 블록으로 출력합니다. 블록 안에는 표(<table>)와 제목(<h3>)만 넣고, 다른 설명/마크다운은 넣지 마세요.\n2. ```html 코드 블록으로 감싸서 출력하세요.\n3. 표 위에 <h3> 태그로 제목을 포함하세요.\n\n## 테이블 구조 (필수)\n\n- <table> 태그에 인라인 스타일 적용\n- 헤더 행은 반드시 <thead> 안의 <th> 태그 사용\n- 데이터 행은 <tbody> 안의 <td> 태그 사용\n- **모든 행의 열 개수를 동일하게 유지** (colspan/rowspan 사용 금지)\n- 그룹 헤더가 필요하면 별도 행으로 만들고, 나머지 열은 빈 <td></td>로 채우기\n- 빈 셀은 반드시 <td></td>로 명시\n\n## 스타일 규칙\n\n- 테이블: border-collapse: collapse; width: 100%;\n- 셀 공통: padding: 8px 12px; font-size: 13px;\n- 헤더(th): background-color: #2b5797; color: white; font-weight: bold; text-align: center;\n- 서브 헤더/그룹 행: background-color: #dce6f1; font-weight: bold;\n- 합계/소계 행: font-weight: bold;\n- 숫자: text-align: right;\n- 금액: 천단위 콤마 (예: 1,234,567)\n- 퍼센트: 소수점 1자리 (예: 45.2%)\n\n## 테두리 규칙 (실제 엑셀처럼 다양하게)\n\n- 헤더 행 하단: border-bottom: 2px solid #2b5797; (굵은 실선)\n- 일반 데이터 셀: border: 1px solid #d0d0d0; (얇은 실선)\n- 소계 행 상단: border-top: 1px dashed #999; (점선 구분)\n- 소계/합계 행 하단: border-bottom: 2px solid #333; (굵은 실선)\n- 그룹 구분 행 하단: border-bottom: 1px dashed #aaa; (점선)\n- 표 전체 외곽: border: 2px solid #333; (굵은 테두리)\n- 좌우 구분이 필요한 열: border-right: 1px solid #bbb;\n\n## 중요 사항\n\n- colspan, rowspan 절대 사용 금지 — 모든 셀은 1x1 크기여야 함\n- 날짜 형식: YYYY-MM-DD\n- 현실적인 샘플 데이터 생성\n- 짝수/홀수 행 배경색 구분하지 않기 (Univer에서 자체 표시)\n\n## 수식 규칙 (중요)\n\n계산이 필요한 셀에는 수식을 직접 작성하세요. \"=\"로 시작하면 수식으로 인식됩니다.\nUniver 수식 엔진이 실제로 계산하므로, 실무에서 쓰는 함수를 적극 활용하세요.\n\n자주 쓰는 함수:\n- 집계: =SUM(B2:B13), =AVERAGE(B2:B13), =COUNT(...), =COUNTA(...), =MAX(...), =MIN(...)\n- 조건 집계: =SUMIF(범위,조건,합계범위), =SUMIFS(...), =COUNTIF(...), =COUNTIFS(...), =AVERAGEIF(...)\n- 조회: =VLOOKUP(찾을값,표범위,열번호,FALSE), =HLOOKUP(...), =INDEX(범위,행,열), =MATCH(찾을값,범위,0), =XLOOKUP(...)\n- 조건: =IF(조건,참,거짓), =IFS(...), =IFERROR(수식,\"오류시값\"), =AND(...), =OR(...)\n- 반올림: =ROUND(값,자릿수), =ROUNDUP(...), =ROUNDDOWN(...)\n- 날짜: =TODAY(), =DATE(년,월,일), =YEAR(...), =MONTH(...), =DAY(...), =EOMONTH(시작일,개월수), =DATEDIF(...)\n- 텍스트: =CONCATENATE(...) 또는 =A2&\" \"&B2, =LEFT/RIGHT/MID(...), =TRIM(...) 등 필요 시 사용\n- 참조: 다른 셀을 자유롭게 참조. 절대참조 =$A$1, 혼합참조 =$A1 / =A$1 형태로 작성\n\n**행 번호 기준 (가장 흔한 실수)**: <h3> 제목은 시트의 행이 아니라 **탭 이름**이 됩니다. 시트 1행은 표의 머리글 행이고, 데이터는 2행부터입니다. 제목 몫으로 한 행을 비워두고 세지 마세요.\n예) 머리글 + 데이터 11행 + 합계 1행이면 → 머리글=1행, 데이터=2~12행, 합계=13행.\n  합계: =SUM(B2:B12) (SUM(B3:B13)처럼 쓰면 합계 칸이 자기 자신을 더해 순환참조)\n  2행의 구성비: =B2/$B$13, 2행의 비율: =D2/B2 (한 칸 아래를 참조하면 값이 통째로 어긋납니다)\n\n규칙:\n- 소계/총계 행에는 반드시 SUM 계열 수식 사용\n- 달성률·전월대비·구성비 등 비교/계산 수치는 값을 직접 적지 말고 수식으로 작성\n- 단가표·코드표가 있으면 VLOOKUP 또는 INDEX/MATCH로 조회하도록 구성\n- 비율은 소수로 출력 (0.97) — 뷰어가 자동으로 97.0%로 표시. 퍼센트에 *100 곱하지 말 것\n- 단순 입력 데이터(이름, 날짜, 기본 금액 등)는 값 그대로 기입\n- 날짜 형식: YYYY-MM-DD, 월 표시: YYYY-MM\n- **입출금·잔액 장부(통장 내역·회비·가계부 등)**: 전기·전년도 **이월금은 입금이 아닙니다** — 입금 열에 넣거나 입금 합계에 포함하지 마세요. 이월금은 잔액 열의 첫 데이터 행에 **숫자 값**으로 넣습니다(수식 아님). 잔액 열이 아직 없으면 잔액 열을 함께 만드세요. 이월 행은 기존 거래 행의 날짜·메모를 덮어쓰지 말고 머리글 바로 아래에 새 행('전년도 이월금')으로 둡니다(입금·출금 칸은 비움). 그다음 행부터 잔액은 \"윗행 잔액 + 입금 − 출금\"(예: =E2+C3-D3)이고, 빈 입금/출금 칸은 0으로 계산되므로 0을 채우지 않아도 됩니다. 최종 잔액은 마지막 거래 행의 잔액을 참조하세요.\n\n## 차트/그래프 규칙\n\n사용자가 차트/그래프를 요청하면 ```chart 펜스에 JSON을 출력합니다(앱이 렌더). 형식:\n{type: bar|line|pie|doughnut|area|scatter|stackedBar, title, sheetName, labelsRange:'A2:A13', seriesRanges:[{name,range}], options:{legend,dataLabels,yFormat}}\n- 타입: bar(막대)·stackedBar(누적 막대)·line(꺾은선)·area(영역)·pie(원형)·doughnut(도넛, 가운데 뚫린 원형)·scatter(산점도). \"도넛\"·\"링\" 요청엔 doughnut.\n- sheetName은 데이터가 있는 시트명. labelsRange/seriesRanges의 범위는 **머리글 행을 제외한 데이터 행만** 지정(예: 머리글이 1행이면 A2부터). **합계/총계/소계 행도 범위에서 제외**하세요 — 합계 막대가 그래프를 왜곡합니다(예: 데이터가 2~13행이고 14행이 합계면 A2:A13까지만).\n- 표와 함께 차트를 요청하면 ```html 표 블록 뒤에 별도의 ```chart 블록을 출력합니다.\n- **기존 시트에 차트만 추가할 때는 ```chart 블록만 출력하세요(표를 다시 그리지 마세요).**\n- yFormat: 'number'|'percent'|'currency'. legend/dataLabels는 true/false.\n- decimals: 축·데이터 라벨의 소수 자릿수(0~4). \"소수점 한 자리로\" 같은 요청은 decimals:1.\n- **차트는 셀의 표시 형식을 그대로 따라갑니다** — 비율 열이 백분율 서식(0.0%)이면 차트도 자동으로 백분율입니다. 차트만 백분율로 바꿔달라는 요청엔 yFormat:'percent'를 지정하세요(값은 건드리지 말 것).\n- 기존 차트의 표시만 바꾸는 요청(\"라벨 백분율로\", \"소수점 한 자리\")은 **같은 차트를 options만 고쳐 ```chart 블록으로 다시 출력**하세요(표·데이터는 재출력 금지).\n\n예시(월별 매출 막대 차트):\n```chart\n{\"type\":\"bar\",\"title\":\"월별 매출\",\"sheetName\":\"매출\",\"labelsRange\":\"A2:A13\",\"seriesRanges\":[{\"name\":\"매출\",\"range\":\"B2:B13\"}],\"options\":{\"legend\":true,\"yFormat\":\"currency\"}}\n```\n\n## 작성 전 자가 점검 (필수)\n\n표를 출력하기 전에 스스로 점검하세요. 문제가 있으면 고친 뒤 출력합니다.\n- 모든 행의 열 개수가 동일한가\n- 합계/소계가 실제 SUM 수식으로 들어갔고, 합산 범위가 맞는가\n- 비교·비율 수치가 값이 아니라 수식으로 계산되는가\n- 수식의 셀 참조(열/행)가 올바른가 (엉뚱한 셀을 가리키지 않는가)\n- 머리글=1행 기준으로 행 번호를 셌는가 (제목 때문에 한 칸 밀리지 않았는가). 표의 마지막 행보다 아래를 참조하는 수식이 하나라도 있으면 전부 한 칸 밀린 것이다\n- 숫자/날짜/퍼센트 형식이 일관적인가\n\n표를 새로 만들어 출력했다면 코드 블록을 닫은 뒤, 요청을 어떻게 해석해 어떤 표를 만들었는지 **1~2문장**으로 덧붙이세요(부분 편집 JSON 응답에는 덧붙이지 않습니다) — 어떤 열·구성으로 정리했는지, 요청이 막연했다면 어떻게 판단했는지. 표의 수치를 해석하거나 요약(인사이트)하지는 마세요. 사용자가 질문했다면 그 답도 이 자리에 한두 줄로 씁니다. 사용자 요청과 같은 언어로, 인사말·마크다운·목록 없이 씁니다.",
+                "cfNo": 1,
+                "userId": 328,
+                "conversationId": 41776,
+                "attachments": [],
+                "runner": true,
+                "usageStage": "playground_sheet",
+                "messageMetadata": {
+                  "type": "sheet_generation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/audio/generate": {
+      "post": {
+        "summary": "오디오 생성",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "mode": "simple",
+                "description": "여자가 부르는 버전으로도 만들어줘",
+                "agNo": 60,
+                "mbNo": 328,
+                "conversationId": 41786,
+                "messageId": 313328,
+                "narrate": {
+                  "lang": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/upload/policy": {
+      "get": {
+        "summary": "첨부 보관 정책",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/memories/gate": {
+      "get": {
+        "summary": "메모리 기능 게이트",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/prompt/categories": {
+      "get": {
+        "summary": "프롬프트 카테고리",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/prompt/my-templates": {
+      "get": {
+        "summary": "내 프롬프트 템플릿",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/notice/unread-count": {
+      "get": {
+        "summary": "안읽은 공지 수",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/visit/record": {
+      "post": {
+        "summary": "방문 기록",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "referrer": "",
+                "page_url": "https://weeai.kr/chat"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "summary": "로그인",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/sessions/current": {
+      "get": {
+        "summary": "현재 세션",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/chat/stream": {
+      "post": {
+        "summary": "모델별 채팅 스트리밍 (멀티모델이면 모델당 1회 병렬)",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "message": "(서버/클라가 붙인 의도 프리앰블 + 사용자 질문)",
+                "history": [],
+                "model": "chatgpt",
+                "agNoOverride": 197,
+                "userId": 328,
+                "conversationId": 41809,
+                "messageId": 313435,
+                "intentResult": {
+                  "_complexity": "simple",
+                  "_recommendST": false,
+                  "confidence": 1,
+                  "reason": "…"
+                },
+                "hasRagContext": false,
+                "ragDocumentCount": 0,
+                "memoryEnabled": false,
+                "disableModelSearch": true,
+                "parentUid": "e139b332-…"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SSE data: {content, model} then [DONE]"
+          }
+        }
+      }
+    },
+    "/api/rag-context/search": {
+      "post": {
+        "summary": "RAG/템플릿 컨텍스트 검색",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "cs_no": 41809,
+                "ms_no": 313435,
+                "pt_no": null,
+                "query_text": "…",
+                "workspace_query_text": "…",
+                "score_threshold": 0.5
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/analyze/complexity": {
+      "post": {
+        "summary": "의도/복잡도 분류",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "query": "…",
+                "recentMessages": [],
+                "memoryRecentMessages": [],
+                "memoryEnabled": false,
+                "ragSignal": {
+                  "templateRelevant": false,
+                  "workspaceRelevant": false,
+                  "sources": []
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "complexity + tool need flags"
+          }
+        }
+      }
+    },
+    "/api/conversations/{cs_no}/generate-title": {
+      "post": {
+        "summary": "대화 제목 생성",
+        "tags": [
+          "WeeAI"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "cs_no",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}

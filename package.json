@@ -1,0 +1,23 @@
+{
+  "name": "weeai-multillm-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": {
+    "packages": [
+      "apps/*"
+    ]
+  },
+  "scripts": {
+    "dev:web": "npm run dev -w apps/web -- -p 43219",
+    "dev:api": "npm run start:dev -w apps/api",
+    "dev": "concurrently -n web,api -c blue,green \"npm run dev:web\" \"npm run dev:api\"",
+    "build": "npm run -ws build",
+    "lint": "npm run -ws --if-present lint",
+    "typecheck": "npm run -ws --if-present typecheck"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "tsx": "^4.19.2"
+  }
+}
+
